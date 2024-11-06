@@ -21,7 +21,6 @@ $user = test_input($_POST['user']);
 $pwd = test_input($_POST['pwd']);
 $repeat = test_input($_POST['repeat']);
 
-// Check if username and both passwords have at least one character
 if (strlen($user) < 1 || strlen($pwd) < 1 || strlen($repeat) < 1) {
     $_SESSION['error'] = 'All fields are required';
     header("location: register.php");
@@ -55,12 +54,11 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-// Insert the new user into the database
 $sql = "INSERT INTO users (username, password) VALUES ('$user', '$hashed_pwd')";
 if ($conn->query($sql) === TRUE) {
-    $_SESSION['username'] = $user; // Store username in session
+    $_SESSION['username'] = $user; 
     $_SESSION['error'] = '';
-    header("location: games.php"); // Redirect to the games page
+    header("location: games.php");
     exit();
 } else {
     $_SESSION['error'] = 'Registration failed. Please try again.';

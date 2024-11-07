@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+    echo "<p>" . $_SESSION['error'] . "</p>";
+    $_SESSION['error'] = ''; // Clear the error message after displaying it
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +21,6 @@
         </form>
         <a href="register.php">Register a new login</a>
         <p>
-        <a href="games.php">UNA NCAA Championship Season</a>
+            <a href="games.php">UNA NCAA Championship Season</a>
     </body>
 </html>

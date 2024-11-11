@@ -17,43 +17,36 @@ if (isset($_SESSION['username'])) {
     <body>
         Display games here...
         <?php
-        // put your code here
         $servername = "localhost";
-        $db_username = "root";
-        $db_password = "";
+        $username = "root";
+        $password = "";
         $dbname = "softball";
 
-        $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+        $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-// Fetch games data
-        $sql = "SELECT opponent, site, result FROM games";
+        $sql = "SELECT * FROM games order by id";
         $result = $conn->query($sql);
 
-        if ($result && $result->num_rows > 0) {
-            echo "<table border='1'>
-            <tr>
+        echo "<table border='1'>
+                <tr>
                 <th>Opponent</th>
                 <th>Site</th>
                 <th>Result</th>
-            </tr>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                <td>" . htmlspecialchars($row['opponent']) . "</td>
-                <td>" . htmlspecialchars($row['site']) . "</td>
-                <td>" . htmlspecialchars($row['result']) . "</td>
-              </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "<p>No games available.</p>";
+                </tr>";
+
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['opponent'] . "</td>";
+            echo "<td>" . $row['site'] . "</td>";
+            echo "<td>" . $row['result'] . "</td>";
+            echo "</tr>";
         }
+        echo "</table>";
 
         $conn->close();
         ?>
-
-
     </body>
 </html>

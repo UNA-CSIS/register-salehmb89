@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
     echo "<p>" . $_SESSION['error'] . "</p>";
-    $_SESSION['error'] = ''; // Clear the error message after displaying it
+    $_SESSION['error'] = '';
 }
 ?>
 
